@@ -85,7 +85,7 @@ def loop_vendas():
 👉 {produto['link']}
 """
 
-            bot.send_message(8324676205, mensagem)
+            bot.send_message(msg.chat.id, mensagem)
 
             print("✅ Produto enviado!")
             time.sleep(30)  # ⏱️ 30 segundos (TESTE)
