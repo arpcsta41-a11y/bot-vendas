@@ -62,7 +62,7 @@ def promo(msg):
 👉 {produto['link']}
 """
 
-    bot.send_message(msg.chat.id, mensagem)
+    bot.send_message(8324676205, mensagem)
 
 # 🧪 TESTE
 @bot.message_handler(commands=['teste'])
