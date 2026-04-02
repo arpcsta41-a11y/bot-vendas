@@ -4,42 +4,25 @@ import random
 import threading
 
 # 🔑 COLOQUE SEU TOKEN AQUI
-TOKEN = "8732867210:AAEzW7NVhlxmf61vmwAxXo7F4UfR6aOtZ6g"
+TOKEN = "7906689791:AAHOERU_82iJA7szifzos9HMTpwAoGlr9fk"
 
 bot = telebot.TeleBot(TOKEN)
 
 print("🔥 Bot de vendas iniciado...")
 
-# 🛍️ PRODUTOS COM LINKS REAIS (EXEMPLO)
+# 🛍️ PRODUTOS
 produtos = [
-    {
-        "nome": "🎧 Fone Bluetooth TWS",
-        "preco": "🔥 Promoção hoje",
-        "link": "https://amzn.to/4toBHwR"
-    },
-    {
-        "nome": "⌚ Smartwatch D20 Fitness",
-        "preco": "💰 A partir de R$49",
-        "link": "https://s.shopee.com.br/1gELJepKf4"
-    },
-    {
-        "nome": "🔊 Mini Caixa de Som Bluetooth",
-        "preco": "🔥 Desconto ativo",
-        "link": "https://s.shopee.com.br/1qXlWFhQWB"
-    },
-    {
-        "nome": "📱 Suporte Veicular para Celular",
-        "preco": "💰 Barato e útil",
-        "link": "https://s.shopee.com.br/1qXlWFhQWB"
-    },
-    {
-        "nome": "🔌 Carregador Turbo USB",
-        "preco": "⚡ Carregamento rápido",
-        "link": "https://s.shopee.com.br/1LbUvcbvCS"
-    }
+    {"nome": "🎧 Fone Bluetooth TWS", "preco": "🔥 Promoção hoje", "link": "https://amzn.to/4toBHwR"},
+    {"nome": "⌚ Smartwatch D20 Fitness", "preco": "💰 A partir de R$49", "link": "https://s.shopee.com.br/1gELJepKf4"},
+    {"nome": "🔊 Mini Caixa de Som Bluetooth", "preco": "🔥 Desconto ativo", "link": "https://s.shopee.com.br/1qXlWFhQWB"},
+    {"nome": "📱 Suporte Veicular", "preco": "💰 Barato e útil", "link": "https://s.shopee.com.br/1qXlWFhQWB"},
+    {"nome": "🔌 Carregador Turbo USB", "preco": "⚡ Carregamento rápido", "link": "https://s.shopee.com.br/1LbUvcbvCS"}
 ]
 
-# 🚀 COMANDO START
+# 👇 SEU ID FIXO (IMPORTANTE)
+CHAT_ID = 8324676205
+
+# 🚀 START
 @bot.message_handler(commands=['start'])
 def start(msg):
     bot.send_message(
@@ -47,7 +30,7 @@ def start(msg):
         "🚀 Bem-vindo!\nVocê vai receber ofertas automaticamente 💰🔥"
     )
 
-# 🔥 COMANDO PROMO
+# 🔥 PROMO
 @bot.message_handler(commands=['promo'])
 def promo(msg):
     produto = random.choice(produtos)
@@ -62,16 +45,14 @@ def promo(msg):
 👉 {produto['link']}
 """
 
-    CHAT_ID = 8324676205
-
-bot.send_message(CHAT_ID, mensagem)
+    bot.send_message(msg.chat.id, mensagem)
 
 # 🧪 TESTE
 @bot.message_handler(commands=['teste'])
 def teste(msg):
     bot.send_message(msg.chat.id, "✅ Bot funcionando perfeitamente!")
 
-# 🔄 LOOP AUTOMÁTICO
+# 🔄 LOOP AUTOMÁTICO (CORRIGIDO)
 def loop_vendas():
     while True:
         try:
@@ -87,10 +68,10 @@ def loop_vendas():
 👉 {produto['link']}
 """
 
-            bot.send_message(msg.chat.id, mensagem)
+            bot.send_message(CHAT_ID, mensagem)  # ✅ CORRETO
 
             print("✅ Produto enviado!")
-            time.sleep(30)  # ⏱️ 30 segundos (TESTE)
+            time.sleep(30)
 
         except Exception as e:
             print("❌ Erro:", e)
